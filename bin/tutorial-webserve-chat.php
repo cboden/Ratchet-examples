@@ -3,7 +3,7 @@ use Ratchet\Examples\Tutorial\Chat;
 use Ratchet\Component\Server\IOServerComponent;
 use Ratchet\Component\WebSocket\WebSocketComponent;
 
-    require dirname(__DIR__) . '/vendor/.composer/autoload.php';
+    require dirname(__DIR__) . '/vendor/autoload.php';
 
     $server = new IOServerComponent(
         new WebSocketComponent(

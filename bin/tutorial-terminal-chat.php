@@ -2,7 +2,7 @@
 use Ratchet\Component\Server\IOServerComponent;
 use Ratchet\Examples\Tutorial\Chat;
 
-    require dirname(__DIR__) . '/vendor/.composer/autoload.php';
+    require dirname(__DIR__) . '/vendor/autoload.php';
 
 
     $server = new IOServerComponent(
