@@ -20,7 +20,4 @@ use Monolog\Logger;
         )
     );
 
-    $server->run(new \Ratchet\Resource\Socket\BSDSocket, '0.0.0.0', 8000);
-
-// Below is what Ratchet will have it set to soon
-//    $server->run(8000);
+    $server->run(8000);
