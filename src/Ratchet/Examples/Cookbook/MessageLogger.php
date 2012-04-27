@@ -40,7 +40,7 @@ class MessageLogger implements MessageComponentInterface {
         $this->_i++;
 
         if (null !== $this->_in) {
-            $this->_in->addInfo('New connection', array('num' => $this->_i, 'resource' => $conn->getID(), 'address' => $conn->getSocket()->getRemoteAddress()));
+            $this->_in->addInfo('New connection', array('num' => $this->_i, 'resource' => $conn->resourceId, 'address' => $conn->remoteAddress));
         }
 
         return $this->handleCommands($this->_component->onOpen($conn));
@@ -51,7 +51,7 @@ class MessageLogger implements MessageComponentInterface {
      */
     public function onMessage(ConnectionInterface $from, $msg) {
         if (null !== $this->_in) {
-            $this->_in->addInfo('New message received', array('from' => $from->getID(), 'len' => strlen($msg), 'msg' => filter_var((string)$msg, FILTER_SANITIZE_SPECIAL_CHARS)));
+            $this->_in->addInfo('New message received', array('from' => $from->resourceId, 'len' => strlen($msg), 'msg' => filter_var((string)$msg, FILTER_SANITIZE_SPECIAL_CHARS)));
         }
 
         return $this->handleCommands($this->_component->onMessage($from, $msg));
@@ -64,7 +64,7 @@ class MessageLogger implements MessageComponentInterface {
         $this->_i--;
 
         if (null !== $this->_in) {
-            $this->_in->addInfo('Connection closed', array('num' => $this->_i, 'resource' => $conn->getID()));
+            $this->_in->addInfo('Connection closed', array('num' => $this->_i, 'resource' => $conn->resourceId));
         }
 
         return $this->handleCommands($this->_component->onClose($conn));
@@ -74,7 +74,7 @@ class MessageLogger implements MessageComponentInterface {
      * @{inheritdoc}
      */
     public function onError(ConnectionInterface $conn, \Exception $e) {
-        $this->_in->addError("({$e->getCode()}): {$e->getMessage()}", array('resource' => $conn->getID(), 'file' => $e->getFile(), 'line' => $e->getLine()));
+        $this->_in->addError("({$e->getCode()}): {$e->getMessage()}", array('resource' => $conn->resourceId, 'file' => $e->getFile(), 'line' => $e->getLine()));
 
         return $this->handleCommands($this->_component->onError($conn, $e));
     }
@@ -105,7 +105,7 @@ class MessageLogger implements MessageComponentInterface {
             $ns    = get_class($cmds);
             $class = substr($ns, strrpos($ns, '\\') + 1);
 
-            $context = array('command' => $class, 'on-resource' => $cmds->getConnection()->getID());
+            $context = array('command' => $class, 'on-resource' => $cmds->getConnection()->resourceId);
 
             if ($cmds instanceof SendMessage) {
                 $context['payload'] = filter_var($cmds->getMessage(), FILTER_SANITIZE_SPECIAL_CHARS);

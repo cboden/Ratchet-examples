@@ -4,7 +4,7 @@
         {
             "package": "cboden/Ratchet",
             "version": "dev-master",
-            "source-reference": "e06aa30096274b16745cc502e0980078f86829ff"
+            "source-reference": "fb6351c60f09c777c0910f773c9e5ffa829e584f"
         },
         {
             "package": "cujojs/when",
@@ -13,8 +13,8 @@
         },
         {
             "package": "doctrine/common",
-            "version": "2.2.x-dev",
-            "source-reference": "1e0aa60d109c630d19543d999f12e2852ef8f932"
+            "version": "dev-master",
+            "source-reference": "4f78640efd3c9c5d790acdb99bcc9f9c10a1587a"
         },
         {
             "package": "gimite/web-socket-js",
@@ -28,7 +28,7 @@
         {
             "package": "monolog/monolog",
             "version": "dev-master",
-            "source-reference": "a6c24f983acc8fd4a513569080f2f3675332d17b"
+            "source-reference": "1.1.0"
         },
         {
             "package": "symfony/event-dispatcher",
@@ -37,8 +37,7 @@
         },
         {
             "package": "symfony/validator",
-            "version": "dev-master",
-            "source-reference": "53ec97264f909d29ae01665e8345f8fb763b94f3"
+            "version": "v2.0.10"
         },
         {
             "package": "tavendo/AutobahnJS",
