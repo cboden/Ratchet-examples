@@ -1,10 +1,7 @@
 <?php
 namespace Ratchet\Examples\Tutorial;
-use Ratchet\Component\MessageComponentInterface;
-use Ratchet\Resource\ConnectionInterface;
-use Ratchet\Resource\Command\Action\SendMessage;
-use Ratchet\Resource\Command\Action\CloseConnection;
-use Ratchet\Resource\Command\Composite as CommandComposite;
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
 
 class Chat implements MessageComponentInterface {
     protected $clients;
@@ -19,21 +16,11 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        // This is a collection of commands to send back to the caller
-        $commands = new CommandComposite;
-
         foreach ($this->clients as $client) {
             if ($from !== $client) {
-                // The sender is not the receiver, enqueue a message to send to each client connected
-                $messageCommand = new SendMessage($client);
-                $messageCommand->setMessage($msg);
-
-                $commands->enqueue($messageCommand);
+                $client->send($msg);
             }
         }
-
-        // Return our collection of SendMessage commands to execute
-        return $commands;
     }
 
     public function onClose(ConnectionInterface $conn) {
@@ -44,6 +31,6 @@ class Chat implements MessageComponentInterface {
     public function onError(ConnectionInterface $conn, \Exception $e) {
         echo "An error has occurred: {$e->getMessage()}\n";
 
-        return new CloseConnection($conn);
+        $conn->close();
     }
 }

@@ -1,5 +1,5 @@
 <?php
-use Ratchet\Component\Server\IOServerComponent;
+use Ratchet\Server\IoServer;
 use Ratchet\Examples\Tutorial\Chat;
 use Ratchet\Examples\Cookbook\MessageLogger;
 use Monolog\Logger;
@@ -12,12 +12,13 @@ use Monolog\Logger;
     $login->pushHandler($stdout);
     $logout->pushHandler($stdout);
 
-    $server = new IOServerComponent(
+    $server = IoServer::factory(
         new MessageLogger(
             new Chat()
           , $login
           , $logout
         )
+      , 8000
     );
 
-    $server->run(8000);
+    $server->run();

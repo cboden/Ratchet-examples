@@ -1,12 +1,13 @@
 <?php
-use Ratchet\Component\Server\IOServerComponent;
+use Ratchet\Server\IoServer;
 use Ratchet\Examples\Tutorial\Chat;
 
     require dirname(__DIR__) . '/vendor/autoload.php';
 
 
-    $server = new IOServerComponent(
+    $server = IoServer::factory(
         new Chat()
+      , 8000
     );
 
-    $server->run(8000);
+    $server->run();

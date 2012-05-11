@@ -1,14 +1,15 @@
 <?php
 use Ratchet\Examples\Tutorial\Chat;
-use Ratchet\Component\Server\IOServerComponent;
-use Ratchet\Component\WebSocket\WebSocketComponent;
+use Ratchet\Server\IoServer;
+use Ratchet\WebSocket\WsServer;
 
     require dirname(__DIR__) . '/vendor/autoload.php';
 
-    $server = new IOServerComponent(
-        new WebSocketComponent(
+    $server = IoServer::factory(
+        new WsServer(
             new Chat()
         )
+      , 8000
     );
 
-    $server->run(8000);
+    $server->run();

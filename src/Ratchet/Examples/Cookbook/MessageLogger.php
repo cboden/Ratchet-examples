@@ -1,8 +1,7 @@
 <?php
 namespace Ratchet\Examples\Cookbook;
-use Ratchet\Component\MessageComponentInterface;
-use Ratchet\Resource\ConnectionInterface;
-use Ratchet\Resource\Command\CommandInterface;
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
 use Monolog\Logger;
 
 class MessageLogger implements MessageComponentInterface {
@@ -43,7 +42,7 @@ class MessageLogger implements MessageComponentInterface {
             $this->_in->addInfo('New connection', array('num' => $this->_i, 'resource' => $conn->resourceId, 'address' => $conn->remoteAddress));
         }
 
-        return $this->handleCommands($this->_component->onOpen($conn));
+        $this->_component->onOpen($conn);
     }
 
     /**
@@ -54,7 +53,7 @@ class MessageLogger implements MessageComponentInterface {
             $this->_in->addInfo('New message received', array('from' => $from->resourceId, 'len' => strlen($msg), 'msg' => filter_var((string)$msg, FILTER_SANITIZE_SPECIAL_CHARS)));
         }
 
-        return $this->handleCommands($this->_component->onMessage($from, $msg));
+        $this->_component->onMessage($from, $msg);
     }
 
     /**
@@ -67,7 +66,7 @@ class MessageLogger implements MessageComponentInterface {
             $this->_in->addInfo('Connection closed', array('num' => $this->_i, 'resource' => $conn->resourceId));
         }
 
-        return $this->handleCommands($this->_component->onClose($conn));
+        $this->_component->onClose($conn);
     }
 
     /**
@@ -76,48 +75,6 @@ class MessageLogger implements MessageComponentInterface {
     public function onError(ConnectionInterface $conn, \Exception $e) {
         $this->_in->addError("({$e->getCode()}): {$e->getMessage()}", array('resource' => $conn->resourceId, 'file' => $e->getFile(), 'line' => $e->getLine()));
 
-        return $this->handleCommands($this->_component->onError($conn, $e));
-    }
-
-    /**
-     * Handles command logging, help for all the onEvents
-     * @param CommandInterface|null
-     * @return CommandInterface|null
-     * @internal
-     * @todo Refactor to be self recursive
-     */
-    protected function handleCommands(CommandInterface $cmds = null) {
-        if (null === $cmds || null === $this->_out) {
-            return $cmds;
-        }
-
-        $count = 1;
-        if ($cmds instanceof \Traversable) {
-            $count = count($cmds);
-            if ($count == 0) {
-                return $cmds;
-            }
-
-            foreach ($cmds as $cmd) {
-                $this->handleCommands($cmd);
-            }
-        } else {
-            $ns    = get_class($cmds);
-            $class = substr($ns, strrpos($ns, '\\') + 1);
-
-            $context = array('command' => $class, 'on-resource' => $cmds->getConnection()->resourceId);
-
-            if ($cmds instanceof SendMessage) {
-                $context['payload'] = filter_var($cmds->getMessage(), FILTER_SANITIZE_SPECIAL_CHARS);
-            }
-
-            $this->_out->addDebug('Command queued for execution', $context);
-
-            return $cmds;
-        }
-
-        $this->_out->addInfo('Number of commands queued for execution', array('num' => $count));
-
-        return $cmds;
+        $this->_component->onError($conn, $e);
     }
 }
