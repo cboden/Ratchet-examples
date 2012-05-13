@@ -2,9 +2,10 @@
 namespace Ratchet\Examples\Cookbook;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use Ratchet\WebSocket\WsServerInterface;
 use Monolog\Logger;
 
-class MessageLogger implements MessageComponentInterface {
+class MessageLogger implements MessageComponentInterface, WsServerInterface {
     /**
      * @var Monolog\Logger|null
      */
@@ -46,7 +47,7 @@ class MessageLogger implements MessageComponentInterface {
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function onMessage(ConnectionInterface $from, $msg) {
         if (null !== $this->_in) {
@@ -57,7 +58,7 @@ class MessageLogger implements MessageComponentInterface {
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function onClose(ConnectionInterface $conn) {
         $this->_i--;
@@ -70,11 +71,22 @@ class MessageLogger implements MessageComponentInterface {
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function onError(ConnectionInterface $conn, \Exception $e) {
         $this->_in->addError("({$e->getCode()}): {$e->getMessage()}", array('resource' => $conn->resourceId, 'file' => $e->getFile(), 'line' => $e->getLine()));
 
         $this->_component->onError($conn, $e);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubProtocols() {
+        if ($this->_component instanceof WsServerInterface) {
+            return $this->_component->getSubProtocols();
+        } else {
+            return array();
+        }
     }
 }

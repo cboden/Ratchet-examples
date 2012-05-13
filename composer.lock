@@ -4,7 +4,7 @@
         {
             "package": "cboden/Ratchet",
             "version": "dev-master",
-            "source-reference": "fb6351c60f09c777c0910f773c9e5ffa829e584f"
+            "source-reference": "f729be2ef35526288ef3c83bfc1afd90c285c36c"
         },
         {
             "package": "cujojs/when",
@@ -12,9 +12,9 @@
             "source-reference": "00fdea1f49c697f97754b8ed6416082f362830ad"
         },
         {
-            "package": "doctrine/common",
+            "package": "evenement/evenement",
             "version": "dev-master",
-            "source-reference": "4f78640efd3c9c5d790acdb99bcc9f9c10a1587a"
+            "source-reference": "808e3aaea8d4f908e455b0e047cc1acc46b38d44"
         },
         {
             "package": "gimite/web-socket-js",
@@ -23,21 +23,46 @@
         },
         {
             "package": "guzzle/guzzle",
-            "version": "v2.0.2"
+            "version": "v2.5.0"
         },
         {
             "package": "monolog/monolog",
             "version": "dev-master",
-            "source-reference": "1.1.0"
+            "source-reference": "2eb0c0978d290a1c45346a1955188929cb4e5db7"
+        },
+        {
+            "package": "react/event-loop",
+            "version": "dev-master",
+            "source-reference": "cc341b109feae06fa33dff7486aa567e3b9d1406"
+        },
+        {
+            "package": "react/socket",
+            "version": "dev-master",
+            "source-reference": "6801c6d8653e1999cb34b235cdb4b3a287e4d528"
         },
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "b98d68d3b8513c62d35504570f09e9d3dc33d083"
+            "source-reference": "0b58a4019befc0bd038bc0ec0165101d5dd31754",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
-            "package": "symfony/validator",
-            "version": "v2.0.10"
+            "package": "symfony/event-dispatcher",
+            "version": "dev-master",
+            "source-reference": "0b58a4019befc0bd038bc0ec0165101d5dd31754"
+        },
+        {
+            "package": "symfony/http-foundation",
+            "version": "dev-master",
+            "source-reference": "cf8e8324c68ce584525502702866485f17f1c8a5",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/http-foundation",
+            "version": "dev-master",
+            "source-reference": "cf8e8324c68ce584525502702866485f17f1c8a5"
         },
         {
             "package": "tavendo/AutobahnJS",
@@ -46,5 +71,15 @@
         }
     ],
     "packages-dev": null,
-    "aliases": []
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "cboden/ratchet": 20,
+        "monolog/monolog": 20,
+        "cujojs/when": 20,
+        "tavendo/autobahnjs": 20,
+        "gimite/web-socket-js": 20
+    }
 }
