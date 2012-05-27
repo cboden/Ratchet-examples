@@ -11,6 +11,8 @@ class ChatRoom implements WampServerInterface {
 
     protected $rooms = array();
 
+    protected $roomLookup = array();
+
     public function __construct() {
         // Put a fake connection in each control room so the room is never destroyed
         $fake = new WampConnection(new ConnectionStub);
@@ -45,16 +47,36 @@ class ChatRoom implements WampServerInterface {
     /**
      * {@inheritdoc}
      */
-    function onCall(ConnectionInterface $conn, $id, $procUri, array $params) {
-        switch ($procURI) {
+    function onCall(ConnectionInterface $conn, $id, $fn, array $params) {
+        switch ($fn) {
             case 'setName':
             break;
 
-            case 'listPeople':
+            case 'createRoom':
+                $topic = $this->escape($params[0]);
+                $created = false;
+
+                if (array_key_exists($topic, $this->roomLookup)) {
+                    $roomId = $this->roomLookup[$topic];
+                } else {
+                    $created = true;
+                    $roomId  = uniqid('room-');
+
+                    $this->broadcast(static::CTRL_ROOMS, array($roomId, $topic, 1));
+                }
+
+                if ($created) {
+                    $this->rooms[$roomId] = new \SplObjectStorage;
+                    $this->roomLookup[$topic] = $roomId;
+
+                    return $conn->callResult($id, array('id' => $roomId, 'display' => $topic));
+                } else {
+                    return $conn->callError($id, array('id' => $roomId, 'display' => $topic));
+                }
             break;
 
             default:
-//                $conn->callError($id, $procUri, 
+                return $conn->callError($id, 'Unknown call');
             break;
         }
     }
@@ -66,20 +88,19 @@ class ChatRoom implements WampServerInterface {
         if (static::CTRL_ROOMS == $topic) {
             foreach ($this->rooms as $room => $patrons) {
                 if (!$this->isControl($room)) {
-                    $conn->event(static::CTRL_ROOMS, array($room, 1));
+                    $conn->event(static::CTRL_ROOMS, array($room, array_search($room, $this->roomLookup), 1));
                 }
             }
         }
 
         if (!array_key_exists($topic, $this->rooms)) {
-            $this->rooms[$topic] = new \SplObjectStorage;
-            $this->broadcast(static::CTRL_ROOMS, array($topic, 1));
-        } else {
-            $this->broadcast($topic, array('joinRoom', $conn->WAMP->sessionId, $conn->Chat->name));
+            return;
+        }
 
-            foreach ($this->rooms[$topic] as $patron) {
-                $conn->event($topic, array('joinRoom', $patron->WAMP->sessionId, $patron->Chat->name));
-            }
+        $this->broadcast($topic, array('joinRoom', $conn->WAMP->sessionId, $conn->Chat->name), $conn);
+
+        foreach ($this->rooms[$topic] as $patron) {
+            $conn->event($topic, array('joinRoom', $patron->WAMP->sessionId, $patron->Chat->name));
         }
 
         $this->rooms[$topic]->attach($conn);
@@ -95,7 +116,7 @@ class ChatRoom implements WampServerInterface {
         $this->rooms[$topic]->detach($conn);
 
         if ($this->rooms[$topic]->count() == 0) {
-            unset($this->rooms[$topic]);
+            unset($this->rooms[$topic], $this->roomLookup[array_search($topic, $this->roomLookup)]);
             $this->broadcast(static::CTRL_ROOMS, array($topic, 0));
         } else {
             $this->broadcast($topic, array('leftRoom', $conn->WAMP->sessionId));
@@ -111,7 +132,7 @@ class ChatRoom implements WampServerInterface {
             return;
         }
 
-        if (!array_key_exists($topic, $conn->Chat->rooms)) {
+        if (!array_key_exists($topic, $conn->Chat->rooms) || !array_key_exists($topic, $this->rooms) || $this->isControl($topic)) {
             // error, can not publish to a room you're not subscribed to
             // not sure how to handle error - WAMP spec doesn't specify
             // for now, we're going to silently fail
@@ -119,12 +140,7 @@ class ChatRoom implements WampServerInterface {
             return;
         }
 
-        if ($this->isControl($topic)) {
-            // Can not publish to control rooms
-            return;
-        }
-
-        // clean the message first
+        $event = $this->escape($event);
 
         $this->broadcast($topic, array('message', $conn->WAMP->sessionId, $event));
     }
@@ -144,7 +160,19 @@ class ChatRoom implements WampServerInterface {
         }
     }
 
+    /**
+     * @param string
+     * @return boolean
+     */
     protected function isControl($room) {
         return (boolean)(substr($room, 0, strlen(static::CTRL_PREFIX)) == static::CTRL_PREFIX);
+    }
+
+    /**
+     * @param string
+     * @return string
+     */
+    protected function escape($string) {
+        return htmlspecialchars($string);
     }
 }
