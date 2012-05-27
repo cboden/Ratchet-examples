@@ -105,7 +105,7 @@ class ChatRoom implements WampServerInterface {
     /**
      * {@inheritdoc}
      */
-    function onPublish(ConnectionInterface $conn, $topic, $event, $exclude, $eligible) {
+    function onPublish(ConnectionInterface $conn, $topic, $event, array $exclude = array(), array $eligible = array()) {
         $event = (string)$event;
         if (empty($event)) {
             return;
