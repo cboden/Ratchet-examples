@@ -85,6 +85,7 @@ class ChatRoom implements WampServerInterface {
      * {@inheritdoc}
      */
     function onSubscribe(ConnectionInterface $conn, $topic) {
+        // Send all the rooms to the person who just subscribed to the room list
         if (static::CTRL_ROOMS == $topic) {
             foreach ($this->rooms as $room => $patrons) {
                 if (!$this->isControl($room)) {
@@ -93,12 +94,15 @@ class ChatRoom implements WampServerInterface {
             }
         }
 
+        // Room does not exist
         if (!array_key_exists($topic, $this->rooms)) {
             return;
         }
 
+        // Notify everyone this guy has joined the room they're in
         $this->broadcast($topic, array('joinRoom', $conn->WAMP->sessionId, $conn->Chat->name), $conn);
 
+        // List all the people already in the room to the person who just joined
         foreach ($this->rooms[$topic] as $patron) {
             $conn->event($topic, array('joinRoom', $patron->WAMP->sessionId, $patron->Chat->name));
         }
@@ -114,6 +118,10 @@ class ChatRoom implements WampServerInterface {
     function onUnSubscribe(ConnectionInterface $conn, $topic) {
         unset($conn->Chat->rooms[$topic]);
         $this->rooms[$topic]->detach($conn);
+
+        if ($this->isControl($topic)) {
+            return;
+        }
 
         if ($this->rooms[$topic]->count() == 0) {
             unset($this->rooms[$topic], $this->roomLookup[array_search($topic, $this->roomLookup)]);

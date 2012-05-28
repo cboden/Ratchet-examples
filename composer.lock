@@ -4,7 +4,7 @@
         {
             "package": "cboden/Ratchet",
             "version": "dev-master",
-            "source-reference": "f729be2ef35526288ef3c83bfc1afd90c285c36c"
+            "source-reference": "27716fef7814a4036b17724be748b6a21f64b19c"
         },
         {
             "package": "cujojs/when",
@@ -14,7 +14,7 @@
         {
             "package": "evenement/evenement",
             "version": "dev-master",
-            "source-reference": "808e3aaea8d4f908e455b0e047cc1acc46b38d44"
+            "source-reference": "b3b308f4b124e643bb632e0a3cf5944894b7d952"
         },
         {
             "package": "gimite/web-socket-js",
@@ -33,36 +33,36 @@
         {
             "package": "react/event-loop",
             "version": "dev-master",
-            "source-reference": "cc341b109feae06fa33dff7486aa567e3b9d1406"
+            "source-reference": "76db13526c13e266f71e4ddd541d08f08ed2f84e"
         },
         {
             "package": "react/socket",
             "version": "dev-master",
-            "source-reference": "6801c6d8653e1999cb34b235cdb4b3a287e4d528"
+            "source-reference": "dcd94f145f7a14a1e21c9c8d965d9d5f42db8c14"
         },
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "0b58a4019befc0bd038bc0ec0165101d5dd31754",
+            "source-reference": "eb82542e8ec9506096caf7c528564c740a214f56",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "0b58a4019befc0bd038bc0ec0165101d5dd31754"
+            "source-reference": "eb82542e8ec9506096caf7c528564c740a214f56"
         },
         {
             "package": "symfony/http-foundation",
             "version": "dev-master",
-            "source-reference": "cf8e8324c68ce584525502702866485f17f1c8a5",
+            "source-reference": "5b1581418381f46679604fd19efc8b518f2390ae",
             "alias-pretty-version": "2.1.x-dev",
             "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "symfony/http-foundation",
             "version": "dev-master",
-            "source-reference": "cf8e8324c68ce584525502702866485f17f1c8a5"
+            "source-reference": "5b1581418381f46679604fd19efc8b518f2390ae"
         },
         {
             "package": "tavendo/AutobahnJS",
