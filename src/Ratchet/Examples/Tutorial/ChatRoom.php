@@ -154,7 +154,7 @@ class ChatRoom implements WampServerInterface {
 
         $event = $this->escape($event);
 
-        $this->broadcast($topic, array('message', $conn->WAMP->sessionId, $event));
+        $this->broadcast($topic, array('message', $conn->WAMP->sessionId, $event, date('c')));
     }
 
     /**
