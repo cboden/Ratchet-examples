@@ -56,6 +56,10 @@ class ChatRoom implements WampServerInterface {
                 $topic = $this->escape($params[0]);
                 $created = false;
 
+                if (empty($topic)) {
+                    return $conn->callError($id, 'Room name can not be empty');
+                }
+
                 if (array_key_exists($topic, $this->roomLookup)) {
                     $roomId = $this->roomLookup[$topic];
                 } else {
