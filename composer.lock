@@ -4,7 +4,7 @@
         {
             "package": "cboden/Ratchet",
             "version": "dev-master",
-            "source-reference": "v0.1.3"
+            "source-reference": "baed21ed8bd96d15ccfb8d9253538454c7258afa"
         },
         {
             "package": "cujojs/when",
@@ -28,7 +28,7 @@
         {
             "package": "monolog/monolog",
             "version": "dev-master",
-            "source-reference": "da33c84d07607d5a0ecb1c629fbaa9ae60554542"
+            "source-reference": "388056fd92f3fc79bb0aea11ac3b6ff572bbf789"
         },
         {
             "package": "react/event-loop",
@@ -38,7 +38,7 @@
         {
             "package": "react/socket",
             "version": "dev-master",
-            "source-reference": "b78d96a2cde9a78ab2f923e9aa9a40f778d051df"
+            "source-reference": "ce608dc03d609719eee1cd3f814912d11273fbfe"
         },
         {
             "package": "symfony/event-dispatcher",
@@ -48,19 +48,13 @@
         {
             "package": "symfony/http-foundation",
             "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/http-foundation",
+            "version": "dev-master",
             "source-reference": "5d15807c883c6a927eb3ac3c04e9a3f62b92e5b4"
-        },
-        {
-            "package": "symfony/http-foundation",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/http-foundation",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
         },
         {
             "package": "tavendo/AutobahnJS",
