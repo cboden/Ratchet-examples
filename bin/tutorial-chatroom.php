@@ -24,7 +24,7 @@ use Monolog\Logger;
               , $logout
             )
         )
-      , 8000
+      , 80
     );
 
     $server->run();
