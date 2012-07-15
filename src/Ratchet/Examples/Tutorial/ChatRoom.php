@@ -4,6 +4,7 @@ use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\WampServerInterface;
 use Ratchet\Tests\Mock\Connection as ConnectionStub;
 use Ratchet\Wamp\WampConnection;
+use Guzzle\Http\Message\Request;
 
 class ChatRoom implements WampServerInterface {
     const CTRL_PREFIX = 'ctrl:';
@@ -13,15 +14,30 @@ class ChatRoom implements WampServerInterface {
 
     protected $roomLookup = array();
 
+    protected $bot;
+
     public function __construct() {
         // Put a fake connection in each control room so the room is never destroyed
-        $fake = new WampConnection(new ConnectionStub);
-        $fake->resourceId = -1;
+        $this->bot = new WampConnection(new ConnectionStub);
 
-        $this->onOpen($fake);
+        $this->bot->WAMP = new \StdClass;
+        $this->bot->WebSocket = new \StdClass;
+
+        $this->bot->resourceId = -1;
+        $this->bot->WAMP->sessionId = 1;
+
+        $this->bot->WebSocket->request = new Request('get', '/');
+        $this->bot->WebSocket->request->addCookie('name', 'Lonely Bot');
+
+        $this->onOpen($this->bot);
 
         $this->rooms[static::CTRL_ROOMS] = new \SplObjectStorage;
-        $this->rooms[static::CTRL_ROOMS]->attach($fake);
+        $this->rooms[static::CTRL_ROOMS]->attach($this->bot);
+
+        $this->onCall($this->bot, '1', 'createRoom', array('General'));
+        $sent = json_decode($this->bot->last['send'], true);
+        $this->bot->gId = $sent[2]['id'];
+        $this->onSubScribe($this->bot, $this->bot->gId);
     }
 
     /**
@@ -30,8 +46,10 @@ class ChatRoom implements WampServerInterface {
     public function onOpen(ConnectionInterface $conn) {
         $conn->Chat = new \StdClass;
 
-        $conn->Chat->rooms = array();
-        $conn->Chat->name  = $conn->WAMP->sessionId;
+        $conn->Chat->rooms    = array();
+        $conn->Chat->name     = $conn->WAMP->sessionId;
+        $conn->Chat->welcomed = false;
+        $conn->Chat->alone    = false;
 
         if (isset($conn->WebSocket)) {
             $conn->Chat->name = $this->escape($conn->WebSocket->request->getCookie('name'));
@@ -123,6 +141,25 @@ class ChatRoom implements WampServerInterface {
         $this->rooms[$topic]->attach($conn);
 
         $conn->Chat->rooms[$topic] = 1;
+
+        if ($topic == $this->bot->gId && false === $conn->Chat->welcomed) {
+            $conn->Chat->welcomed = true;
+
+            $intro = (strstr($conn->Chat->name, 'Anonymous') ? 'Greetings' : "Hi {$conn->Chat->name}");
+            $after = '';
+
+            if (count($this->rooms[$this->bot->gId]) == 2) {
+                $after = " Looks like it's just you and I at the moment...I'll play copycat until someone else joins.";
+                $conn->Chat->alone = true;
+            }
+
+            $conn->event($topic, array(
+                'message'
+              , $this->bot->WAMP->sessionId
+              , "{$intro}! This is an IRC-like chatroom powered by Ratchet.{$after}"
+              , date('c')
+            ));
+        }
     }
 
     /**
@@ -164,6 +201,20 @@ class ChatRoom implements WampServerInterface {
         $event = $this->escape($event);
 
         $this->broadcast($topic, array('message', $conn->WAMP->sessionId, $event, date('c')));
+
+        if ($topic == $this->bot->gId) {
+            if ($event == 'test') {
+                return $conn->event($topic, array('message', $this->bot->WAMP->sessionId, 'pass', date('c')));
+            }
+
+            if ($event == 'help' || $event == '!help') {
+                return $conn->event($topic, array('message', $this->bot->WAMP->sessionId, 'No one can hear you scream in /dev/null', date('c')));
+            }
+
+            if ($conn->Chat->alone && count($this->rooms[$topic]) == 2) {
+                return $conn->event($topic, array('message', $this->bot->WAMP->sessionId, $event, date('c')));
+            }
+        }
     }
 
     /**

@@ -4,11 +4,12 @@
   , "homepage": "http://socketo.me"
   , "keywords": ["WebSocket", "demo", "Ratchet"]
   , "license": "MIT"
+  , "minimum-stability": "dev"
   , "authors": [
         {
             "name": "Chris Boden"
           , "email": "cboden@gmail.com"
-          , "homepage": "http://res.im"
+          , "role": "Developer"
         }
     ]
  , "autoload": {
@@ -17,8 +18,8 @@
         }
     }
   , "require": {
-        "php": ">=5.3.2"
-      , "cboden/Ratchet": "dev-master"
+        "php": ">=5.3.3"
+      , "cboden/Ratchet": "dev-0.2-beta"
       , "monolog/monolog": "dev-master"
       , "cujojs/when": "dev-master"
       , "tavendo/AutobahnJS": "dev-master"

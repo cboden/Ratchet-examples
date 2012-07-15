@@ -1,25 +1,29 @@
 {
-    "hash": "251a71f739e7e27044e45736cde449d8",
+    "hash": "d282dc56a26909646418b7d0951eeb50",
     "packages": [
         {
             "package": "cboden/Ratchet",
-            "version": "dev-master",
-            "source-reference": "baed21ed8bd96d15ccfb8d9253538454c7258afa"
+            "version": "dev-0.2-beta",
+            "source-reference": "1afd42d9872ae0ebfc740d7a87c42498805d8993",
+            "commit-date": "1342306364"
         },
         {
             "package": "cujojs/when",
             "version": "dev-master",
-            "source-reference": "00fdea1f49c697f97754b8ed6416082f362830ad"
+            "source-reference": "00fdea1f49c697f97754b8ed6416082f362830ad",
+            "commit-date": "1332162068"
         },
         {
             "package": "evenement/evenement",
-            "version": "dev-master",
-            "source-reference": "fa966683e7df3e5dd5929d984a44abfbd6bafe8d"
+            "version": "1.0.x-dev",
+            "source-reference": "v1.0.0",
+            "commit-date": "1338390068"
         },
         {
             "package": "gimite/web-socket-js",
             "version": "dev-master",
-            "source-reference": "master"
+            "source-reference": "master",
+            "commit-date": "1331980643"
         },
         {
             "package": "guzzle/guzzle",
@@ -28,22 +32,32 @@
         {
             "package": "monolog/monolog",
             "version": "dev-master",
-            "source-reference": "388056fd92f3fc79bb0aea11ac3b6ff572bbf789"
+            "source-reference": "59fb9f41be22b246f5e5d3bd8a012ed77f44a7d0",
+            "commit-date": "1342167011"
         },
         {
             "package": "react/event-loop",
-            "version": "dev-master",
-            "source-reference": "0927a2129394f10cc8534994271c6073ca9e350c"
+            "version": "v0.1.1"
         },
         {
             "package": "react/socket",
-            "version": "dev-master",
-            "source-reference": "ce608dc03d609719eee1cd3f814912d11273fbfe"
+            "version": "v0.1.1"
+        },
+        {
+            "package": "react/stream",
+            "version": "v0.1.1"
         },
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "30d3f5da80c2aeab15bcdb5a7d448d15bc294b23"
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/event-dispatcher",
+            "version": "dev-master",
+            "source-reference": "b99b49760016467099f010aff7a5098861d49e09",
+            "commit-date": "1342207366"
         },
         {
             "package": "symfony/http-foundation",
@@ -54,12 +68,14 @@
         {
             "package": "symfony/http-foundation",
             "version": "dev-master",
-            "source-reference": "5d15807c883c6a927eb3ac3c04e9a3f62b92e5b4"
+            "source-reference": "498c2da9c3fecefc7e3b0add73621f3feb337ddd",
+            "commit-date": "1342207366"
         },
         {
             "package": "tavendo/AutobahnJS",
             "version": "dev-master",
-            "source-reference": "v0.6.0"
+            "source-reference": "v0.6.0",
+            "commit-date": "1332351031"
         }
     ],
     "packages-dev": null,
