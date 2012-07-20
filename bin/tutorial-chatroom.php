@@ -1,30 +1,50 @@
 <?php
 use Ratchet\Server\IoServer;
+use Ratchet\Server\FlashPolicy;
 use Ratchet\WebSocket\WsServer;
-use Ratchet\Wamp\WampServer;
+use Ratchet\Wamp\ProtocolServer;
+
+use React\EventLoop\Factory;
+use React\Socket\Server as Reactor;
+
 use Ratchet\Examples\Tutorial\ChatRoom;
 use Ratchet\Examples\Cookbook\MessageLogger;
+
 use Monolog\Logger;
 
     require dirname(__DIR__) . '/vendor/autoload.php';
 
+    // Setup logging
     $stdout = new \Monolog\Handler\StreamHandler('php://stdout');
     $logout = new Logger('SockOut');
     $login  = new Logger('Sock-In');
     $login->pushHandler($stdout);
     $logout->pushHandler($stdout);
 
-    $server = IoServer::factory(
+    $loop = Factory::create();
+
+    // Setup our ChatRoom Ratchet application
+    $webSock = new Reactor($loop);
+    $webSock->listen(80, '0.0.0.0');
+    $webServer = new IoServer(
         new WsServer(
             new MessageLogger(
-                new WampServer(
+                new ProtocolServer(
                     new ChatRoom
                 )
               , $login
               , $logout
             )
         )
-      , 80
+      , $webSock
     );
 
-    $server->run();
+    // Allow Flash sockets to connect to our app
+    $flashSock = new Reactor($loop);
+    $flashSock->listen(843, '0.0.0.0');
+    $policy = new FlashPolicy;
+    $policy->addAllowedAccess('*', 80);
+    $webServer = new IoServer($policy, $flashSock);
+
+    // GO GO GO!
+    $loop->run();
