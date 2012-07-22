@@ -1,5 +1,5 @@
 <?php
-namespace Ratchet\Examples\Cookbook;
+namespace Ratchet\Cookbook;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\WebSocket\WsServerInterface;

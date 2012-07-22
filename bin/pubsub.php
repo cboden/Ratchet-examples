@@ -2,7 +2,7 @@
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
 use Ratchet\Wamp\WampServer;
-use Ratchet\Examples\Cookbook\OpenPubSub;
+use Ratchet\Cookbook\OpenPubSub;
 
     require dirname(__DIR__) . '/vendor/autoload.php';
 

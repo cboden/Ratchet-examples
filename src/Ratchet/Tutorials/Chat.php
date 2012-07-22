@@ -1,5 +1,5 @@
 <?php
-namespace Ratchet\Examples\Tutorial;
+namespace Ratchet\Tutorials;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 

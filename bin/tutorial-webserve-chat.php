@@ -1,5 +1,5 @@
 <?php
-use Ratchet\Examples\Tutorial\Chat;
+use Ratchet\Tutorials\Chat;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
 

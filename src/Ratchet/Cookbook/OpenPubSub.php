@@ -1,5 +1,5 @@
 <?php
-namespace Ratchet\Examples\Cookbook;
+namespace Ratchet\Cookbook;
 use Ratchet\ConnectionInterface as Conn;
 use Ratchet\Wamp\WampServerInterface;
 

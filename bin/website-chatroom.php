@@ -2,13 +2,14 @@
 use Ratchet\Server\IoServer;
 use Ratchet\Server\FlashPolicy;
 use Ratchet\WebSocket\WsServer;
-use Ratchet\Wamp\ProtocolServer;
+use Ratchet\Wamp\ServerProtocol;
 
 use React\EventLoop\Factory;
 use React\Socket\Server as Reactor;
 
-use Ratchet\Examples\Tutorial\ChatRoom;
-use Ratchet\Examples\Cookbook\MessageLogger;
+use Ratchet\Website\Bot;
+use Ratchet\Website\ChatRoom;
+use Ratchet\Cookbook\MessageLogger;
 
 use Monolog\Logger;
 
@@ -29,8 +30,10 @@ use Monolog\Logger;
     $webServer = new IoServer(
         new WsServer(
             new MessageLogger(
-                new ProtocolServer(
-                    new ChatRoom
+                new ServerProtocol(
+                    new Bot(
+                        new ChatRoom
+                    )
                 )
               , $login
               , $logout
