@@ -9,7 +9,7 @@ use Ratchet\Wamp\WampServerInterface;
  *  on that topic by all clients
  */
 class OpenPubSub implements WampServerInterface {
-    function onPublish(Conn $conn, $topic, $event, array $exclude = array(), array $eligible = array()) {
+    public function onPublish(Conn $conn, $topic, $event, array $exclude = array(), array $eligible = array()) {
         $topic->broadcast($event);
     }
 
