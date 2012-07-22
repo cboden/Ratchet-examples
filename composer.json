@@ -22,6 +22,7 @@
   , "require": {
         "php": ">=5.3.3"
       , "cboden/Ratchet": "dev-0.2-beta"
+      , "react/zmq": "dev-master"
       , "monolog/monolog": "dev-master"
       , "cujojs/when": "dev-master"
       , "tavendo/AutobahnJS": "dev-master"

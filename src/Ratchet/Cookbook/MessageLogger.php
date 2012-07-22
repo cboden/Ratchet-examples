@@ -5,6 +5,10 @@ use Ratchet\ConnectionInterface;
 use Ratchet\WebSocket\WsServerInterface;
 use Monolog\Logger;
 
+/**
+ * A Ratchet component that wraps Monolog loggers tracking received messages
+ * @todo Get outgoing working; could create LoggingConnection decorator
+ */
 class MessageLogger implements MessageComponentInterface, WsServerInterface {
     /**
      * @var Monolog\Logger|null
@@ -40,7 +44,7 @@ class MessageLogger implements MessageComponentInterface, WsServerInterface {
         $this->_i++;
 
         if (null !== $this->_in) {
-            $this->_in->addInfo('New connection', array('num' => $this->_i, 'resource' => $conn->resourceId, 'address' => $conn->remoteAddress));
+            $this->_in->addInfo('onOpen', array('#open' => $this->_i, 'id' => $conn->resourceId, 'ip' => $conn->remoteAddress));
         }
 
         $this->_component->onOpen($conn);
@@ -51,7 +55,7 @@ class MessageLogger implements MessageComponentInterface, WsServerInterface {
      */
     public function onMessage(ConnectionInterface $from, $msg) {
         if (null !== $this->_in) {
-            $this->_in->addInfo('New message received', array('from' => $from->resourceId, 'len' => strlen($msg), 'msg' => filter_var((string)$msg, FILTER_SANITIZE_SPECIAL_CHARS)));
+            $this->_in->addInfo('onMsg', array('from' => $from->resourceId, 'len' => strlen($msg), 'msg' => $msg));
         }
 
         $this->_component->onMessage($from, $msg);
@@ -64,7 +68,7 @@ class MessageLogger implements MessageComponentInterface, WsServerInterface {
         $this->_i--;
 
         if (null !== $this->_in) {
-            $this->_in->addInfo('Connection closed', array('num' => $this->_i, 'resource' => $conn->resourceId));
+            $this->_in->addInfo('onClose', array('#open' => $this->_i, 'id' => $conn->resourceId));
         }
 
         $this->_component->onClose($conn);
@@ -74,7 +78,7 @@ class MessageLogger implements MessageComponentInterface, WsServerInterface {
      * {@inheritdoc}
      */
     public function onError(ConnectionInterface $conn, \Exception $e) {
-        $this->_in->addError("({$e->getCode()}): {$e->getMessage()}", array('resource' => $conn->resourceId, 'file' => $e->getFile(), 'line' => $e->getLine()));
+        $this->_in->addError("onError: ({$e->getCode()}): {$e->getMessage()}", array('id' => $conn->resourceId, 'file' => $e->getFile(), 'line' => $e->getLine()));
 
         $this->_component->onError($conn, $e);
     }
