@@ -14,7 +14,9 @@
     ]
  , "autoload": {
         "psr-0": {
-            "Ratchet\\Examples": "src"
+            "Ratchet\\Cookbook": "src"
+          , "Ratchet\\Tutorials": "src"
+          , "Ratchet\\Website": "src"
         }
     }
   , "require": {
