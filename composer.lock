@@ -1,5 +1,5 @@
 {
-    "hash": "91fa4b5f29eb13c3905abb51f6ea8e3e",
+    "hash": "334ceeb494a666f75debc3c4b12c7591",
     "packages": [
         {
             "package": "cboden/Ratchet",
@@ -12,6 +12,12 @@
             "version": "dev-master",
             "source-reference": "00fdea1f49c697f97754b8ed6416082f362830ad",
             "commit-date": "1332162068"
+        },
+        {
+            "package": "evenement/evenement",
+            "version": "1.0.x-dev",
+            "source-reference": "v1.0.0",
+            "commit-date": "1338390068"
         },
         {
             "package": "gimite/web-socket-js",
@@ -38,10 +44,16 @@
             "commit-date": "1342167011"
         },
         {
-            "package": "react/react",
-            "version": "dev-examples-connection-event",
-            "source-reference": "b8d0c7a9338997db35567fd2198b069c2b3fdbc4",
-            "commit-date": "1342455641"
+            "package": "react/event-loop",
+            "version": "v0.1.1"
+        },
+        {
+            "package": "react/socket",
+            "version": "v0.1.1"
+        },
+        {
+            "package": "react/stream",
+            "version": "v0.1.1"
         },
         {
             "package": "symfony/event-dispatcher",
@@ -76,16 +88,10 @@
     ],
     "packages-dev": [
         {
-            "package": "evenement/evenement",
-            "version": "1.0.x-dev",
-            "source-reference": "v1.0.0",
-            "commit-date": "1338390068"
-        },
-        {
             "package": "react/zmq",
             "version": "dev-master",
-            "source-reference": "1bcfe84d6a2bdabadb55b34adc5ed3131fe5c71c",
-            "commit-date": "1341883679"
+            "source-reference": "099b7828b14cfc202f908a4b28c7ed87a9533c20",
+            "commit-date": "1343069522"
         }
     ],
     "aliases": [

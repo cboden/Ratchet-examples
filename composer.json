@@ -23,10 +23,6 @@
 
         }
     }
-  , "replace": {
-        "react/event-loop": "*"
-      , "react/socket": "*"
-    }
   , "require": {
         "php": ">=5.3.3"
       , "cboden/Ratchet": "dev-0.2-beta"
@@ -34,7 +30,6 @@
       , "cujojs/when": "dev-master"
       , "tavendo/AutobahnJS": "dev-master"
       , "gimite/web-socket-js": "dev-master"
-      , "react/react": "*"
     }
   , "require-dev": {
         "react/zmq": "dev-master"
