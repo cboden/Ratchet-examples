@@ -1,11 +1,11 @@
 {
-    "hash": "d282dc56a26909646418b7d0951eeb50",
+    "hash": "91fa4b5f29eb13c3905abb51f6ea8e3e",
     "packages": [
         {
             "package": "cboden/Ratchet",
             "version": "dev-0.2-beta",
-            "source-reference": "1afd42d9872ae0ebfc740d7a87c42498805d8993",
-            "commit-date": "1342306364"
+            "source-reference": "97d1b8a77037c592e635170fc4d1117b5bb8d24e",
+            "commit-date": "1343005797"
         },
         {
             "package": "cujojs/when",
@@ -14,20 +14,22 @@
             "commit-date": "1332162068"
         },
         {
-            "package": "evenement/evenement",
-            "version": "1.0.x-dev",
-            "source-reference": "v1.0.0",
-            "commit-date": "1338390068"
-        },
-        {
             "package": "gimite/web-socket-js",
             "version": "dev-master",
             "source-reference": "master",
             "commit-date": "1331980643"
         },
         {
-            "package": "guzzle/guzzle",
-            "version": "v2.5.0"
+            "package": "guzzle/common",
+            "version": "v2.8.1"
+        },
+        {
+            "package": "guzzle/http",
+            "version": "v2.8.1"
+        },
+        {
+            "package": "guzzle/parser",
+            "version": "v2.8.1"
         },
         {
             "package": "monolog/monolog",
@@ -36,16 +38,10 @@
             "commit-date": "1342167011"
         },
         {
-            "package": "react/event-loop",
-            "version": "v0.1.1"
-        },
-        {
-            "package": "react/socket",
-            "version": "v0.1.1"
-        },
-        {
-            "package": "react/stream",
-            "version": "v0.1.1"
+            "package": "react/react",
+            "version": "dev-examples-connection-event",
+            "source-reference": "b8d0c7a9338997db35567fd2198b069c2b3fdbc4",
+            "commit-date": "1342455641"
         },
         {
             "package": "symfony/event-dispatcher",
@@ -56,8 +52,8 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "dev-master",
-            "source-reference": "b99b49760016467099f010aff7a5098861d49e09",
-            "commit-date": "1342207366"
+            "source-reference": "v2.1.0-BETA4",
+            "commit-date": "1342739894"
         },
         {
             "package": "symfony/http-foundation",
@@ -68,8 +64,8 @@
         {
             "package": "symfony/http-foundation",
             "version": "dev-master",
-            "source-reference": "498c2da9c3fecefc7e3b0add73621f3feb337ddd",
-            "commit-date": "1342207366"
+            "source-reference": "v2.1.0-BETA4",
+            "commit-date": "1343042318"
         },
         {
             "package": "tavendo/AutobahnJS",
@@ -78,7 +74,20 @@
             "commit-date": "1332351031"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+        {
+            "package": "evenement/evenement",
+            "version": "1.0.x-dev",
+            "source-reference": "v1.0.0",
+            "commit-date": "1338390068"
+        },
+        {
+            "package": "react/zmq",
+            "version": "dev-master",
+            "source-reference": "1bcfe84d6a2bdabadb55b34adc5ed3131fe5c71c",
+            "commit-date": "1341883679"
+        }
+    ],
     "aliases": [
 
     ],
@@ -88,6 +97,7 @@
         "monolog/monolog": 20,
         "cujojs/when": 20,
         "tavendo/autobahnjs": 20,
-        "gimite/web-socket-js": 20
+        "gimite/web-socket-js": 20,
+        "react/zmq": 20
     }
 }

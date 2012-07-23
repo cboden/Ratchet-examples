@@ -73,6 +73,7 @@ use Monolog\Handler\StreamHandler;
         new WsServer(
             new PortLogger($push, 9000, new NullComponent)
         )
+      , $logSock
     );
 
     // GO GO GO!

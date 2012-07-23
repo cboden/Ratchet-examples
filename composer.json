@@ -17,16 +17,27 @@
             "Ratchet\\Cookbook": "src"
           , "Ratchet\\Tutorials": "src"
           , "Ratchet\\Website": "src"
+          , "Ratchet\\Tests\\Cookbook": "tests"
+          , "Ratchet\\Tests\\Tutorials": "tests"
+          , "Ratchet\\Tests\\Website": "tests"
+
         }
+    }
+  , "replace": {
+        "react/event-loop": "*"
+      , "react/socket": "*"
     }
   , "require": {
         "php": ">=5.3.3"
       , "cboden/Ratchet": "dev-0.2-beta"
-      , "react/zmq": "dev-master"
       , "monolog/monolog": "dev-master"
       , "cujojs/when": "dev-master"
       , "tavendo/AutobahnJS": "dev-master"
       , "gimite/web-socket-js": "dev-master"
+      , "react/react": "*"
+    }
+  , "require-dev": {
+        "react/zmq": "dev-master"
     }
   , "repositories": [
         {

@@ -4,7 +4,7 @@
     require $root . '/vendor/autoload.php';
 
     try {
-        $db = new PDO("sqlite::file://{$root}/portLog.sqlite");
+        $db = new PDO("sqlite:{$root}/reports/portLog.sqlite");
     } catch (PDOException $pe) {
         die($pe->getMessage() . "\n");
     }
@@ -20,10 +20,8 @@
     });
 
     $pull->on('message', function ($port) use ($db) {
-        $port = (int)$port;
-
-        // untested
-        $db->exec("INSERT INTO `portCounter` (`port`, `count`) VALUES ({$port}, 0) ON DUPLICATE KEY UPDATE `count` = `count` + 1 WHERE `port` = {$port}");
+        $db->prepare("INSERT OR IGNORE INTO portCounter VALUES (?, 0)")->execute(array((int)$port));
+        $db->prepare("UPDATE portCounter SET count = count + 1 WHERE port LIKE ?")->execute(array((int)$port));
     });
 
     $loop->run();

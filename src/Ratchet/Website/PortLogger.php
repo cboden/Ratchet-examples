@@ -1,6 +1,8 @@
 <?php
 namespace Ratchet\Website;
 use Ratchet\ConnectionInterface;
+use Ratchet\MessageComponentInterface;
+use Ratchet\WebSocket\WsServerInterface;
 use React\ZMQ\SocketWrapper;
 
 class PortLogger implements MessageComponentInterface, WsServerInterface {
