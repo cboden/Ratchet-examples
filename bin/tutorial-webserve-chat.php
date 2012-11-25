@@ -9,7 +9,7 @@ use Ratchet\WebSocket\WsServer;
         new WsServer(
             new Chat()
         )
-      , 8000
+      , 8080
     );
 
     $server->run();

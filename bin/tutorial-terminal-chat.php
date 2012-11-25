@@ -6,7 +6,7 @@ use Ratchet\Tutorials\Chat;
 
     $server = IoServer::factory(
         new Chat()
-      , 8000
+      , 8080
     );
 
     $server->run();

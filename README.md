@@ -1,3 +1,9 @@
+### Installation
+
+If you'll be running the website IRC chat demo make sure to run composer with dev mode:
+
+    composer.phar install --dev
+
 ### bin/
 
 Run scripts in here to launch you socket server.
