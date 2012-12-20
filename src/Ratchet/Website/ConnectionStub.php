@@ -6,7 +6,7 @@ class ConnectionStub implements ConnectionInterface {
     protected $onSend;
     protected $onClose;
 
-    public function __construct(\Closure $onSend = null, \Cosure $onClose = null) {
+    public function __construct(\Closure $onSend = null, \Closure $onClose = null) {
         $this->setSendCallback($onSend);
         $this->setCloseCallback($onClose);
     }
