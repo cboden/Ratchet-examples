@@ -1,7 +1,7 @@
 <?php
 use Ratchet\Server\IoServer;
-use Ratchet\Examples\Tutorial\Chat;
-use Ratchet\Examples\Cookbook\MessageLogger;
+use Ratchet\Tutorials\Chat;
+use Ratchet\Cookbook\MessageLogger;
 use Monolog\Logger;
 
     require dirname(__DIR__) . '/vendor/autoload.php';
