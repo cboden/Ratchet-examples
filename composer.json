@@ -13,20 +13,17 @@
         }
     ]
  , "autoload": {
-        "psr-0": {
-            "Ratchet\\Cookbook": "src"
-          , "Ratchet\\Tutorials": "src"
-          , "Ratchet\\Website": "src"
-          , "Ratchet\\Tests\\Cookbook": "tests"
-          , "Ratchet\\Tests\\Tutorials": "tests"
-          , "Ratchet\\Tests\\Website": "tests"
+        "psr-4": {
+            "Ratchet\\": "src"
+          , "Ratchet\\Tests\\": "tests"
 
         }
     }
   , "require": {
-        "php": ">=5.3.3"
-      , "cboden/Ratchet": "master"
-      , "monolog/monolog": "dev-master"
+        "php": ">=5.4.2"
+      , "cboden/Ratchet": "dev-master"
+      , "psr/log": "~1.0"
+      , "monolog/monolog": "~1.0"
       , "cujojs/when": "dev-master"
       , "tavendo/AutobahnJS": "dev-master"
       , "gimite/web-socket-js": "dev-master"
@@ -53,11 +50,11 @@
           , "package": {
                 "name": "tavendo/AutobahnJS"
               , "type": "library"
-              , "version": "dev-master"
+              , "version": "0.8.2"
               , "source": {
                     "url": "https://github.com/tavendo/AutobahnJS.git"
                   , "type": "git"
-                  , "reference": "v0.6.0"
+                  , "reference": "v0.8.2"
                 }
             }
         }

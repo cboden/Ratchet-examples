@@ -29,7 +29,7 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
-        echo "An error has occurred: {$e->getMessage()}\n";
+        trigger_error("An error has occurred: {$e->getMessage()}\n", E_USER_WARNING);
 
         $conn->close();
     }

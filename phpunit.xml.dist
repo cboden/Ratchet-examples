@@ -12,7 +12,7 @@
 
     <testsuites>
         <testsuite name="Ratchet Examples Test Suite">
-            <directory>./tests/Ratchet/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 
