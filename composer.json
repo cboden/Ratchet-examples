@@ -4,7 +4,6 @@
   , "homepage": "http://socketo.me"
   , "keywords": ["WebSocket", "demo", "Ratchet"]
   , "license": "MIT"
-  , "minimum-stability": "dev"
   , "authors": [
         {
             "name": "Chris Boden"
@@ -24,12 +23,12 @@
       , "cboden/Ratchet": "dev-master"
       , "psr/log": "~1.0"
       , "monolog/monolog": "~1.0"
-      , "cujojs/when": "dev-master"
-      , "tavendo/AutobahnJS": "dev-master"
+      , "cujojs/when": "2.7.*"
+      , "tavendo/AutobahnJS": "0.8.*"
       , "gimite/web-socket-js": "dev-master"
     }
-  , "require-dev": {
-        "react/zmq": "dev-master"
+  , "suggest": {
+        "ext-zmq": "*"
     }
   , "repositories": [
         {
@@ -63,11 +62,11 @@
           , "package": {
                 "name": "cujojs/when"
               , "type": "library"
-              , "version": "dev-master"
+              , "version": "2.7.1"
               , "source": {
                     "url": "https://github.com/cujojs/when.git"
                   , "type": "git"
-                  , "reference": "00fdea1f49c697f97754b8ed6416082f362830ad"
+                  , "reference": "2.7.1"
                 }
             }
         }
