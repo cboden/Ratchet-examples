@@ -125,6 +125,6 @@ class MessageLoggedConnection extends AbstractConnectionDecorator implements Con
     }
     
     public function close($code = null) {
-        $this->getConnection->close($code);
+        $this->getConnection()->close($code);
     }
 }
