@@ -2,6 +2,7 @@
 // Dear FIG: Thank you for PSR-0!
 use Ratchet\Server\IoServer;
 use Ratchet\Server\FlashPolicy;
+use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use Ratchet\Wamp\ServerProtocol;
 
@@ -44,16 +45,18 @@ use Monolog\Handler\StreamHandler;
     $webSock = new Reactor($loop);
     $webSock->listen(80, '0.0.0.0');
     $webServer = new IoServer(           // Basic I/O with clients, aww yeah
-        new WsServer(                    // Boom! WebSockets
-            new PortLogger($push, 80,    // Compare vs the almost over 9000 conns
-                new MessageLogger(       // Log events in case of "oh noes"
-                    new ServerProtocol(  // WAMP; the new hotness sub-protocol
-                        new Bot(         // People kept asking me if I was a bot, so I made one!
-                            new ChatRoom // ...and DISCUSS!
+        new HttpServer(                  // HTTP because reasons
+            new WsServer(                    // Boom! WebSockets
+                new PortLogger($push, 80,    // Compare vs the almost over 9000 conns
+                    new MessageLogger(       // Log events in case of "oh noes"
+                        new ServerProtocol(  // WAMP; the new hotness sub-protocol
+                            new Bot(         // People kept asking me if I was a bot, so I made one!
+                                new ChatRoom // ...and DISCUSS!
+                            )
                         )
+                      , $login
+                      , $logout
                     )
-                  , $login
-                  , $logout
                 )
             )
         )
